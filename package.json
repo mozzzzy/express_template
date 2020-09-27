@@ -1,0 +1,16 @@
+{
+  "name": "express_template",
+  "version": "0.0.1",
+  "description": "code template of express application",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "mozzzzy",
+  "private": "true",
+  "dependencies": {
+    "express": "^4.17.1",
+    "log4js": "^6.3.0"
+  }
+}
