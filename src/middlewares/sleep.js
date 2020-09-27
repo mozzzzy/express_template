@@ -19,6 +19,11 @@ app.get('/sleep', (req, res, next) => {
     next();
     return;
   }
+  if (!Number.isSafeInteger(sleepTimeMs)) {
+    res.status(400).send(`Query ms=\"${sleepTimeMsStr}\" is too large.`);
+    next();
+    return;
+  }
 
   serverLogger.debug(`Sleep ${sleepTimeMs} milli seconds and return response.`);
   setTimeout(() => {

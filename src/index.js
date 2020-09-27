@@ -67,6 +67,7 @@ app.use((req, res, next) => {
   next();
 });
 
+// Add middleware here
 app.get('/sleep', sleepApp);
 
 // When app sent the http response and it has "Connection: close" header,
@@ -77,6 +78,13 @@ app.use((req, res, next) => {
     serverLogger.debug(`Server sent Connection close header. Close tcp connection.`);
     res.connection.destroy();
   }
+  next();
+});
+
+// Error handler
+app.use((err, req, res, next) => {
+  serverLogger.error(err.stack);
+  res.status(500).send('Unexpected Server Error.');
   next();
 });
 
