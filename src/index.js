@@ -12,12 +12,6 @@ const config = require('./config');
 const sleepApp = require('./middlewares/sleep');
 
 /*
- * Variables
- */
-
-const terminatorTimeOutMs = 10000;
-
-/*
  * Main
  */
 

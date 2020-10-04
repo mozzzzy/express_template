@@ -6,6 +6,7 @@
   "scripts": {
     "start": "node src/index.js",
     "lint": "eslint . --config eslintrc.json",
+    "lintfix": "eslint . --config eslintrc.json --fix",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "mozzzzy",
