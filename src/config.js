@@ -21,13 +21,6 @@ for (let i = 0; i < configKeys.length; i += 1) {
       if (Number.isInteger(parseInt(process.env[key], 10))) {
         config[key] = parseInt(process.env[key], 10);
       }
-    } else if (typeof config[key] === 'boolean') {
-      if (process.env[key] === 'true') {
-        config[key] = true;
-      }
-      if (process.env[key] === 'false') {
-        config[key] = false;
-      }
     } else {
       config[key] = process.env[key];
     }
