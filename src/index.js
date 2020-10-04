@@ -8,16 +8,13 @@ const log4js = require('log4js');
 const { createHttpTerminator } = require('http-terminator');
 
 // Internal modules
+const config = require('./config');
 const sleepApp = require('./middlewares/sleep');
 
 /*
  * Variables
  */
 
-const accessLogFilePath = 'access.log';
-const logLevel = 'debug';
-const port = process.env.LISTEN_PORT || 3000;
-const serverLogFilePath = 'server.log';
 const terminatorTimeOutMs = 10000;
 
 /*
@@ -28,21 +25,21 @@ const terminatorTimeOutMs = 10000;
 log4js.configure({
   appenders: {
     out: { type: 'stdout' },
-    server: { type: 'file', filename: serverLogFilePath },
-    access: { type: 'file', filename: accessLogFilePath },
+    server: { type: 'file', filename: config.SERVER_LOG_FILE_PATH },
+    access: { type: 'file', filename: config.ACCESS_LOG_FILE_PATH },
   },
   categories: {
     default: {
       appenders: ['out'],
-      level: logLevel,
+      level: config.LOG_LEVEL,
     },
     server: {
       appenders: ['server', 'out'],
-      level: logLevel,
+      level: config.LOG_LEVEL,
     },
     access: {
       appenders: ['access', 'out'],
-      level: logLevel,
+      level: config.LOG_LEVEL,
       layout: {
         type: 'pattern',
         pattern: '%d %m',
@@ -72,13 +69,13 @@ app.use((req, res) => {
 });
 
 // Listen
-const server = app.listen(port, () => {
-  serverLogger.info(`Server is listening at ${port} port.`);
+const server = app.listen(config.LISTEN_PORT, () => {
+  serverLogger.info(`Server is listening at ${config.LISTEN_PORT} port.`);
 });
 
 const terminator = createHttpTerminator({
   server,
-  gracefulTerminationTimeout: terminatorTimeOutMs,
+  gracefulTerminationTimeout: config.TERMINATE_CONNECTION_TIMEOUT_MS,
 });
 
 // Handle signals
