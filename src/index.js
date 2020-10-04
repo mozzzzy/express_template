@@ -34,11 +34,11 @@ log4js.configure({
   categories: {
     default: {
       appenders: ['out'],
-      level: logLevel
+      level: logLevel,
     },
     server: {
       appenders: ['server', 'out'],
-      level: logLevel
+      level: logLevel,
     },
     access: {
       appenders: ['access', 'out'],
@@ -46,9 +46,9 @@ log4js.configure({
       layout: {
         type: 'pattern',
         pattern: '%d %m',
-      }
+      },
     },
-  }
+  },
 });
 const serverLogger = log4js.getLogger('server');
 const accessLogger = log4js.getLogger('access');
@@ -76,7 +76,10 @@ const server = app.listen(port, () => {
   serverLogger.info(`Server is listening at ${port} port.`);
 });
 
-const terminator = createHttpTerminator({server, gracefulTerminationTimeout: terminatorTimeOutMs});
+const terminator = createHttpTerminator({
+  server,
+  gracefulTerminationTimeout: terminatorTimeOutMs,
+});
 
 // Handle signals
 process.on('SIGTERM', async () => {

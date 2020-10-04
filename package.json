@@ -5,13 +5,19 @@
   "main": "index.js",
   "scripts": {
     "start": "node src/index.js",
+    "lint": "eslint . --config eslintrc.json",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "mozzzzy",
   "private": "true",
   "dependencies": {
+    "eslint-plugin-import": "^2.22.1",
     "express": "^4.17.1",
     "http-terminator": "^2.0.3",
     "log4js": "^6.3.0"
+  },
+  "devDependencies": {
+    "eslint": "^7.10.0",
+    "eslint-config-airbnb-base": "^14.2.0"
   }
 }

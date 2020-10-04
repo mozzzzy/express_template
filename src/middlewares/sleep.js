@@ -13,14 +13,14 @@ app.get('/sleep', (req, res, next) => {
     next();
     return;
   }
-  sleepTimeMs = parseInt(sleepTimeMsStr, 10);
+  const sleepTimeMs = parseInt(sleepTimeMsStr, 10);
   if (Number.isNaN(sleepTimeMs)) {
-    res.status(400).send(`Invalid query ms=\"${sleepTimeMsStr}\".`);
+    res.status(400).send(`Invalid query ms="${sleepTimeMsStr}".`);
     next();
     return;
   }
   if (!Number.isSafeInteger(sleepTimeMs)) {
-    res.status(400).send(`Query ms=\"${sleepTimeMsStr}\" is too large.`);
+    res.status(400).send(`Query ms="${sleepTimeMsStr}" is too large.`);
     next();
     return;
   }
