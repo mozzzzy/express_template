@@ -50,6 +50,14 @@ const app = express();
 // Add middleware here
 app.get('/sleep', sleepApp);
 
+app.all('*', (req, res, next) => {
+  if (!res.headersSent) {
+    serverLogger.debug('No route is found. Send 404 response code.');
+    res.status(404).end();
+    next();
+  }
+});
+
 // Error handler
 app.use((err, req, res, next) => {
   serverLogger.error(err.stack);
