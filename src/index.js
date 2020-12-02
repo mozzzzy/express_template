@@ -54,8 +54,8 @@ app.all('*', (req, res, next) => {
   if (!res.headersSent) {
     serverLogger.debug('No route is found. Send 404 response code.');
     res.status(404).end();
-    next();
   }
+  next();
 });
 
 // Error handler
