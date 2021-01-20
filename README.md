@@ -4,6 +4,7 @@ Express application code template.
 ## Functions
 This express template shows the implementations of following features.
 * Listen, Read http request, and Send http response
+* Connection timeout
 * Use express middleware
 * Log access and diagnostic informations
 * Applications graceful shutdown
