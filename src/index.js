@@ -75,6 +75,9 @@ const server = app.listen(config.LISTEN_PORT, () => {
   serverLogger.info(`Server is listening at ${config.LISTEN_PORT} port.`);
 });
 
+// Set timeout(millisecond)
+server.timeout = config.CONNECTION_TIMEOUT_MS;
+
 const terminator = createHttpTerminator({
   server,
   gracefulTerminationTimeout: config.TERMINATE_CONNECTION_TIMEOUT_MS,

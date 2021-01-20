@@ -35,7 +35,8 @@ Following environment variables are loaded.
 | Environment Variable            | Default Value | Description |
 |:--------------------------------|:--------------|:------------|
 | ACCESS_LOG_FILE_PATH            | access.log    | File path of access log. |
+| CONNECTION_TIMEOUT_MS           | 10000         | The number of milliseconds before active connections time out. |
 | LISTEN_PORT                     | 3000          | Port number to listen.   |
 | LOG_LEVEL                       | debug         | Log level. You can use one of `trace`, `debug`, `info`, `warn`, `error`, `fatal`. |
 | SERVER_LOG_FILE_PATH            | server.log    | File path of server log. Diagnostic informations are logged to this file. |
-| TERMINATE_CONNECTION_TIMEOUT_MS | 10000         | The number of milliseconds before active connections time out when `SIGTERM` is received. |
+| TERMINATE_CONNECTION_TIMEOUT_MS | 20000         | The number of milliseconds before active connections time out when `SIGTERM` is received. |
