@@ -84,10 +84,15 @@ const terminator = createHttpTerminator({
 });
 
 // Handle signals
-process.on('SIGTERM', async () => {
-  serverLogger.debug('Process got SIGTERM.');
-
-  serverLogger.debug('Terminate all tcp connections.');
-  await terminator.terminate();
-  serverLogger.debug('Server closed all tcp connections.');
+let terminating = false;
+process.on('SIGINT', async () => {
+  if (!terminating) {
+    serverLogger.debug('Process got SIGINT.');
+    terminating = true;
+    serverLogger.debug('Terminate all tcp connections.');
+    await terminator.terminate();
+    serverLogger.debug('Server closed all tcp connections.');
+  } else {
+    serverLogger.debug('Process got SIGINT. But server is already about to terminate.');
+  }
 });
