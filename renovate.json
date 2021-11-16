@@ -1,0 +1,14 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "bumpVersion": "patch",
+  "packageRules": [
+    {
+      "matchPackageNames": ["jest"],
+      "groupName": "jest packages"
+    },
+    {
+      "matchPackageNames": ["eslint"],
+      "groupName": "eslint packages"
+    }
+  ]
+}
