@@ -23,6 +23,6 @@
     "eslint-plugin-import": "^2.22.1",
     "jest": "^26.4.2",
     "node-dev": "^6.6.0",
-    "supertest": "^5.0.0"
+    "supertest": "^6.0.0"
   }
 }
