@@ -1,6 +1,6 @@
 {
   "name": "express_template",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "code template of express application",
   "main": "index.js",
   "scripts": {
@@ -14,7 +14,7 @@
   "private": "true",
   "dependencies": {
     "express": "^4.17.1",
-    "http-terminator": "^2.0.3",
+    "http-terminator": "^3.0.0",
     "log4js": "^6.3.0"
   },
   "devDependencies": {
