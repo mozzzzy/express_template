@@ -6,8 +6,8 @@
   "scripts": {
     "start":   "node src/index.js",
     "dev":     "node-dev src/index.js",
-    "lint":    "eslint . --config eslintrc.json",
-    "lintfix": "eslint . --config eslintrc.json --fix",
+    "lint":    "eslint . --config eslintrc.js",
+    "lintfix": "eslint . --config eslintrc.js --fix",
     "test":    "jest"
   },
   "author": "mozzzzy",
