@@ -1,6 +1,6 @@
 {
   "name": "express_template",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "code template of express application",
   "main": "index.js",
   "scripts": {
@@ -22,7 +22,7 @@
     "eslint-config-airbnb-base": "^14.2.0",
     "eslint-plugin-import": "^2.22.1",
     "jest": "^26.4.2",
-    "node-dev": "^6.6.0",
+    "node-dev": "^7.0.0",
     "supertest": "^5.0.0"
   }
 }
