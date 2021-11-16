@@ -3,11 +3,11 @@
   "bumpVersion": "patch",
   "packageRules": [
     {
-      "matchPackageNames": ["jest"],
+      "matchPackagePatterns": ["jest"],
       "groupName": "jest packages"
     },
     {
-      "matchPackageNames": ["eslint"],
+      "matchPackagePatterns": ["eslint"],
       "groupName": "eslint packages"
     }
   ]
