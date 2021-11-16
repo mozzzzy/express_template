@@ -1,9 +1,10 @@
 const defaultConfig = {
   ACCESS_LOG_FILE_PATH: 'access.log',
+  CONNECTION_TIMEOUT_MS: 10000,
   LISTEN_PORT: 3000,
   LOG_LEVEL: 'debug',
   SERVER_LOG_FILE_PATH: 'server.log',
-  TERMINATE_CONNECTION_TIMEOUT_MS: 10000,
+  TERMINATE_CONNECTION_TIMEOUT_MS: 20000,
 };
 
 describe('Test of config module', () => {
