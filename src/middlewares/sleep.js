@@ -5,11 +5,9 @@ const log4js = require('log4js');
 // Get logger
 const serverLogger = log4js.getLogger('server');
 
-const buildBody = msg => {
-  return {
-    msg
-  };
-};
+const buildBody = (msg) => ({
+  msg,
+});
 
 const app = express();
 app.get('/sleep', (req, res, next) => {
