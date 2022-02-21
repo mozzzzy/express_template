@@ -16,14 +16,14 @@ describe('Test of config module', () => {
 
   test('Default values can be used.', () => {
     /* eslint-disable-next-line global-require */
-    const config = require('../src/config.js');
+    const config = require('../src/config');
     expect(config).toEqual(defaultConfig);
   });
 
   test('Default values can be overwrote by env (string).', () => {
     process.env.ACCESS_LOG_FILE_PATH = 'log/access.log';
     /* eslint-disable-next-line global-require */
-    const config = require('../src/config.js');
+    const config = require('../src/config');
 
     const overwroteConfig = { ...defaultConfig };
     overwroteConfig.ACCESS_LOG_FILE_PATH = 'log/access.log';
@@ -34,7 +34,7 @@ describe('Test of config module', () => {
   test('Default values can be overwrote by env (integer).', () => {
     process.env.LISTEN_PORT = '80';
     /* eslint-disable-next-line global-require */
-    const config = require('../src/config.js');
+    const config = require('../src/config');
 
     const overwroteConfig = { ...defaultConfig };
     overwroteConfig.LISTEN_PORT = 80;
