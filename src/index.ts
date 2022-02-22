@@ -3,56 +3,57 @@
  */
 
 // External modules
-const log4js = require('log4js');
-const { createHttpTerminator } = require('http-terminator');
+import { configure, getLogger } from 'log4js';
+import { createHttpTerminator } from 'http-terminator';
 
 // Internal modules
-const config = require('./config');
-const app = require('./app');
+import config from './config';
+import app from './app';
 
 /*
  * Main
  */
 
 // Initialize logger
-log4js.configure({
+const log4jsConfig = {
   appenders: {
     out: { type: 'stdout' },
-    server: { type: 'file', filename: config.SERVER_LOG_FILE_PATH },
-    access: { type: 'file', filename: config.ACCESS_LOG_FILE_PATH },
+    server: { type: 'file', filename: config.getStr('SERVER_LOG_FILE_PATH') },
+    access: { type: 'file', filename: config.getStr('ACCESS_LOG_FILE_PATH') },
   },
   categories: {
     default: {
       appenders: ['out'],
-      level: config.LOG_LEVEL,
+      level: config.getStr('LOG_LEVEL'),
     },
     server: {
       appenders: ['server', 'out'],
-      level: config.LOG_LEVEL,
+      level: config.getStr('LOG_LEVEL'),
     },
     access: {
       appenders: ['access', 'out'],
-      level: config.LOG_LEVEL,
+      level: config.getStr('LOG_LEVEL'),
       layout: {
         type: 'pattern',
         pattern: '%d %m',
       },
     },
   },
-});
-const serverLogger = log4js.getLogger('server');
+};
+configure(log4jsConfig);
+const serverLogger = getLogger('server');
 
 // Listen
-const server = app.listen(config.LISTEN_PORT, () => {
-  serverLogger.info(`Server is listening at ${config.LISTEN_PORT} port.`);
+const server = app.listen(config.getNumber('LISTEN_PORT'), () => {
+  serverLogger.info(`Server is listening at ${config.getNumber('LISTEN_PORT')} port.`);
 });
 
 // Set timeout(millisecond)
-server.timeout = config.CONNECTION_TIMEOUT_MS;
+server.timeout = config.getNumber('CONNECTION_TIMEOUT_MS');
 
 const terminator = createHttpTerminator({
   server,
-  gracefulTerminationTimeout: config.TERMINATE_CONNECTION_TIMEOUT_MS,
+  gracefulTerminationTimeout: config.getNumber('TERMINATE_CONNECTION_TIMEOUT_MS'),
 });
 
 // Handle signals

@@ -1,5 +1,5 @@
-const request = require('supertest');
-const app = require('../../src/middlewares/sleep');
+import request from 'supertest';
+import app from '../../src/middlewares/sleep';
 
 describe('Test of sleep module', () => {
   test('Return 200 OK when request with valid ms query', async () => {

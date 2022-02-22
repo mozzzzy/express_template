@@ -1,11 +1,11 @@
 // External modules
-const express = require('express');
-const log4js = require('log4js');
+import express from 'express';
+import { getLogger } from 'log4js';
 
 // Get logger
-const serverLogger = log4js.getLogger('server');
+const serverLogger = getLogger('server');
 
-const buildBody = (msg) => ({
+const buildBody = (msg: string) => ({
   msg,
 });
 
@@ -14,6 +14,11 @@ app.get('/sleep', (req, res, next) => {
   const sleepTimeMsStr = req.query.ms;
   if (sleepTimeMsStr === undefined) {
     res.status(400).json(buildBody('Query ms=<milli second> is required.'));
+    next();
+    return;
+  }
+  if (typeof sleepTimeMsStr !== 'string') {
+    res.status(400).json(buildBody('Invalid query ms=<milli second>.'));
     next();
     return;
   }
@@ -28,7 +33,6 @@ app.get('/sleep', (req, res, next) => {
     next();
     return;
   }
-
   serverLogger.debug(`Sleep ${sleepTimeMs} milli seconds and return response.`);
   setTimeout(() => {
     res.status(200).json(buildBody('OK'));
@@ -36,4 +40,4 @@ app.get('/sleep', (req, res, next) => {
   }, sleepTimeMs);
 });
 
-module.exports = app;
+export default app;

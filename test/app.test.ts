@@ -1,16 +1,15 @@
-const log4js = require('log4js');
-const request = require('supertest');
-
-const app = require('../src/app');
+import { getLogger } from 'log4js';
+import request from 'supertest';
+import app from '../src/app';
 
 /* eslint-disable-next-line no-unused-vars */
 const sleepApp = require('../src/middlewares/sleep');
 
 // Helper functions
-function sleep(msec) {
+function sleep(msec: number) {
   return new Promise((resolve) => {
     setTimeout(() => {
-      resolve();
+      resolve(undefined);
     }, msec);
   });
 }
@@ -27,7 +26,7 @@ jest.mock('log4js', () => {
   };
 
   return {
-    getLogger: (name) => {
+    getLogger: (name: string) => {
       switch (name) {
         case 'access':
           return accessLogger;
@@ -41,10 +40,10 @@ jest.mock('log4js', () => {
 });
 
 // Mock sleepApp.
-// FIXME: I couldn't implement dummyApp in each test case. So I implement it here.
-//        But I want to separate dummyApp like dummyAppReturn200 and dummyAppReturn400,
+// FIXME: I couldn't implement dummy app in each test case. So I implement it here.
+//        But I want to separate dummy app like dummyAppReturn200 and dummyAppReturn400,
 //        dummyAppThrowError.
-const dummyApp = (req, res, next) => {
+jest.mock('../src/middlewares/sleep', () => jest.fn((req, res, next) => {
   switch (req.query.dummyStatus) {
     case '200':
       res.status(200).end();
@@ -56,15 +55,14 @@ const dummyApp = (req, res, next) => {
       throw new Error('dummy error.');
   }
   next();
-};
-jest.mock('../src/middlewares/sleep', () => jest.fn(dummyApp));
+}));
 
 describe('Test of app module', () => {
   describe('App write access log for any request.', () => {
     const sleepMsec = 1;
 
     beforeEach(() => {
-      log4js.getLogger('access').info.mockClear();
+      (getLogger('access').info as jest.Mock).mockClear();
     });
 
     test('When middleware sends 200 response, app write access log.', async () => {
@@ -72,7 +70,7 @@ describe('Test of app module', () => {
       expect(res.statusCode).toBe(200);
       // Wait for the app to write the access log.
       await sleep(sleepMsec);
-      expect(log4js.getLogger('access').info).toHaveBeenCalledTimes(1);
+      expect(getLogger('access').info).toHaveBeenCalledTimes(1);
     });
 
     test('When middleware sends 400 response, app write access log.', async () => {
@@ -80,7 +78,7 @@ describe('Test of app module', () => {
       expect(res.statusCode).toBe(400);
       // Wait for the app to write the access log.
       await sleep(sleepMsec);
-      expect(log4js.getLogger('access').info).toHaveBeenCalledTimes(1);
+      expect(getLogger('access').info).toHaveBeenCalledTimes(1);
     });
 
     test('When middleware throws error, app write access log.', async () => {
@@ -88,7 +86,7 @@ describe('Test of app module', () => {
       expect(res.statusCode).toBe(500);
       // Wait for the app to write the access log.
       await sleep(sleepMsec);
-      expect(log4js.getLogger('access').info).toHaveBeenCalledTimes(1);
+      expect(getLogger('access').info).toHaveBeenCalledTimes(1);
     });
   });
 
