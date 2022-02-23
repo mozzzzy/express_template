@@ -15,7 +15,7 @@
   "dependencies": {
     "express": "^4.17.1",
     "http-terminator": "^3.0.0",
-    "log4js": "^6.3.0"
+    "log4js": "^6.4.1"
   },
   "devDependencies": {
     "eslint": "^8.0.0",
