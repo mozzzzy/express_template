@@ -8,22 +8,15 @@ on:
     branches: [ typescript-main ]
   pull_request:
     branches: [ typescript-main ]
-  schedule:
-    # The format of cron is 'Minutes' 'Hours' 'Days' 'Months' 'Days of Week'
-    # The time zone is UTC.
-    - cron: '0 22 * * *'
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
     strategy:
       matrix:
-        node-version: [12.x, 14.x, 16.x]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
-
+        node-version: [12.x, 14.x, 16.x]
     steps:
     - uses: actions/checkout@v2
     - name: Use Node.js ${{ matrix.node-version }}
