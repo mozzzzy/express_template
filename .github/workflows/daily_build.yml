@@ -1,13 +1,13 @@
 # This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
 # For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
 
-name: Node.js CI
+name: Daily Build
 
 on:
-  push:
-    branches: [ javascript-main ]
-  pull_request:
-    branches: [ javascript-main ]
+  schedule:
+    # The format of cron is 'Minutes' 'Hours' 'Days' 'Months' 'Days of Week'
+    # The time zone is UTC.
+    - cron: '0 22 * * *'
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 jobs:
@@ -17,8 +17,12 @@ jobs:
       matrix:
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
         node-version: [12.x, 14.x, 16.x]
+        branch: [javascript-main, typescript-main]
     steps:
-    - uses: actions/checkout@v2
+    - name: Checkout to ${{ matrix.branch }}
+      uses: actions/checkout@v2
+      with:
+        ref: ${{ matrix.branch }}
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v2
       with:
