@@ -4,25 +4,25 @@
   "description": "code template of express application",
   "main": "index.js",
   "scripts": {
-    "start":   "node src/index.js",
-    "dev":     "node-dev src/index.js",
-    "lint":    "eslint . --config eslintrc.js",
+    "start": "node src/index.js",
+    "dev": "node-dev src/index.js",
+    "lint": "eslint . --config eslintrc.js",
     "lintfix": "eslint . --config eslintrc.js --fix",
-    "test":    "jest"
+    "test": "jest"
   },
   "author": "mozzzzy",
   "private": "true",
   "dependencies": {
-    "express": "^4.17.1",
-    "http-terminator": "^3.0.0",
+    "express": "^4.17.3",
+    "http-terminator": "^3.0.4",
     "log4js": "^6.4.1"
   },
   "devDependencies": {
-    "eslint": "^8.0.0",
+    "eslint": "^8.10.0",
     "eslint-config-airbnb-base": "^15.0.0",
-    "eslint-plugin-import": "^2.22.1",
-    "jest": "^27.0.0",
-    "node-dev": "^7.0.0",
-    "supertest": "^6.0.0"
+    "eslint-plugin-import": "^2.25.4",
+    "jest": "^27.5.1",
+    "node-dev": "^7.1.0",
+    "supertest": "^6.2.2"
   }
 }
