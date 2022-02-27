@@ -29,8 +29,23 @@ jobs:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
     - run: npm ci
+    - name: Update npm packages
+      if: ${{ matrix.node-version == '14.x' || matrix.node-version == '16.x' }}
+      run: |
+        npm i -g npm_package_auto_updater
+        npm-package-auto-updater -debug -set-caret
+        npm i
     - run: npm run build --if-present
     - run: npm run lint
     - run: npm test
     - run: npm audit
     - run: npm outdated
+    - name: Push package.json and package-lock.json if needed
+      if: ${{ matrix.node-version == '16.x' }}
+      run: |
+        if [[ ! -z $(git diff --shortstat package.json package-lock.json) ]]; then \
+          git config --global user.name "github actions"; \
+          git add package.json package-lock.json; \
+          git commit -m "chore: Update dependencies"; \
+          git push origin ${{ matrix.branch }}
+        fi
