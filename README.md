@@ -1,6 +1,7 @@
 # express_template
 ![javascript-main](https://github.com/mozzzzy/express_template/actions/workflows/node.js.yml/badge.svg?branch=javascript-main)  
-![node.js and typescript](https://github.com/mozzzzy/express_template/actions/workflows/typescript-main.yml/badge.svg?branch=typescript-main)
+![node.js and typescript](https://github.com/mozzzzy/express_template/actions/workflows/typescript-main.yml/badge.svg?branch=typescript-main)  
+![daily build](https://github.com/mozzzzy/express_template/actions/workflows/daily_build.yml/badge.svg?branch=javascript-main)
 
 Express application code template.  
 
