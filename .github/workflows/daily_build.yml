@@ -13,6 +13,8 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    # Set always() not to cancel all jobs (12.x, 14.x, 16.x) when one of the jobs failed.
+    if: always()
     strategy:
       matrix:
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
