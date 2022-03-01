@@ -14,7 +14,7 @@
   "private": "true",
   "dependencies": {
     "express": "^4.17.3",
-    "http-terminator": "^3.0.4",
+    "http-terminator": "^3.1.0",
     "log4js": "^6.4.1"
   },
   "devDependencies": {
