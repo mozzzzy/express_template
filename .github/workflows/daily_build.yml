@@ -14,11 +14,14 @@ jobs:
   build:
     runs-on: ubuntu-latest
     strategy:
+      # Set 1 to run 16.x job before other jobs.
+      max-parallel: 1
       # Set false not to cancel all jobs when one of the jobs failed.
       fail-fast: false
       matrix:
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
-        node-version: [12.x, 14.x, 16.x]
+        # We should execute 16.x first. Because only 16.x job updates package.json if necessary.
+        node-version: [16.x, 14.x, 12.x]
         branch: [javascript-main, typescript-main]
     steps:
     - name: Checkout to ${{ matrix.branch }}
